@@ -25,6 +25,14 @@ class App extends Component {
     ],
   }
 
+  removeContact = (deleteContact) => {
+    this.setState((currentState) => ({
+      contacts: currentState.contacts.filter((contact) => {
+        return contact.id !== deleteContact.id
+      }),
+    }))
+  }
+
   render() {
     // In order to get data to a Component you pass that
     // data in as a prop when you create the Component element
