@@ -38,7 +38,10 @@ class App extends Component {
     // data in as a prop when you create the Component element
     return (
       <div>
-        <ListContacts contacts={this.state.contacts} />
+        <ListContacts
+          contacts={this.state.contacts}
+          onDeleteContact={this.removeContact}
+        />
       </div>
     )
   }
