@@ -6,29 +6,51 @@ class ListContacts extends Component {
     contacts: propTypes.array.isRequired,
     onDeleteContact: propTypes.func.isRequired,
   }
+  // add a property to our component state object
+  state = {
+    query: '',
+  }
+
+  updateQuery = (query) => {
+    this.setState(() => ({
+      query: query.trim(),
+    }))
+  }
 
   render() {
     return (
-      <ol className="contact-list">
-        {this.props.contacts.map((contact) => (
-          <li key={contact.id} className="contact-list-item">
-            <div
-              className="contact-avatar"
-              style={{ backgroundImage: `url(${contact.avatarURL})` }}
-            />
-            <div className="contact-details">
-              <p>{contact.name}</p>
-              <p>{contact.handle}</p>
-            </div>
-            <button
-              className=""
-              onClick={() => this.props.onDeleteContact(contact)}
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ol>
+      <div className="list-contacts">
+        {JSON.stringify(this.state)}
+        <div className="list-contacts-top">
+          <input
+            className="search-contacts"
+            type="text"
+            placeholder="Search Contacts"
+            value={this.state.query}
+            onChange={(event) => this.updateQuery(event.target.value)}
+          />
+        </div>
+        <ol className="contact-list">
+          {this.props.contacts.map((contact) => (
+            <li key={contact.id} className="contact-list-item">
+              <div
+                className="contact-avatar"
+                style={{ backgroundImage: `url(${contact.avatarURL})` }}
+              />
+              <div className="contact-details">
+                <p>{contact.name}</p>
+                <p>{contact.handle}</p>
+              </div>
+              <button
+                className=""
+                onClick={() => this.props.onDeleteContact(contact)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ol>
+      </div>
     )
   }
 }
